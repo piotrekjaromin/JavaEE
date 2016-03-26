@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "/lab2", urlPatterns = {"/lab2"})
 public class RedirectLab2 extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("lab2.jsp");
+        response.sendRedirect("lab2/lab2.html");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

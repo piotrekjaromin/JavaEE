@@ -24,10 +24,4 @@ public class Zad2 extends HttpServlet {
         out.close();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("Witaj, JBoss Get");
-        out.close();
-    }
 }

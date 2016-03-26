@@ -1,5 +1,6 @@
 package com.lab2;
 
+import com.lab2.model.Feedback;
 import com.lab2.model.PersonalData;
 
 import javax.servlet.ServletContext;
@@ -15,50 +16,8 @@ import java.util.List;
 import java.util.Vector;
 
 
-class Feedback {
-    String name;
-    String mail;
-    String comment;
-
-    public Feedback(String name, String mail, String comment) {
-        this.name = name;
-        this.mail = mail;
-        this.comment = comment;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-        public String toString() {
-            return name + " " + mail + " " + comment;
-        }
-}
-
 @WebServlet(name = "/zad2_5", urlPatterns = {"/zad2_5"})
 public class Zad5 extends HttpServlet {
-
-   // private List <Feedback> feedbacks = new Vector<>();
 
     List<PersonalData> personalDatas = new Vector<PersonalData>(Arrays.asList(
             new PersonalData("login1", "password1", "name1", "surname1"),
@@ -74,22 +33,13 @@ public class Zad5 extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if(login.isEmpty()) {
-            //out.println("empty login");
-            //out.close();
-            response.sendRedirect("lab2.jsp");
-            //return;
+            response.sendRedirect("lab2.html");
         } else if(password.isEmpty()) {
-            //out.println("empty password");
-            //out.close();
-            response.sendRedirect("lab2.jsp");
-            //return;
+            response.sendRedirect("lab2/lab2.html");
         } else if(!personalDatas.contains(new PersonalData(login, password, "", ""))){
-           // out.println("bad login or password");
-           // out.close();
-            response.sendRedirect("lab2.jsp");
-            //return;
+           response.sendRedirect("lab2/lab2.html");
         } else
-            response.sendRedirect("lab2_5.jsp");
+            response.sendRedirect("lab2/lab2_5.html");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,8 +49,8 @@ public class Zad5 extends HttpServlet {
         String sth = getServletConfig().getInitParameter("login");
         System.out.println(sth);
         ServletContext servletContext = getServletContext();
-
         Vector  <Feedback> feedbacks = (Vector)servletContext.getAttribute("feetbacks");
+
         if(feedbacks==null){
             feedbacks = new Vector<>();
             feedbacks.add(new Feedback(login, mail, comment));
@@ -112,7 +62,5 @@ public class Zad5 extends HttpServlet {
         PrintWriter out= response.getWriter();
         out.println(feedbacks);
         out.close();
-
-
     }
 }
